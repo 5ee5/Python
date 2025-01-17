@@ -13,17 +13,17 @@ Arch:
 sudo pacman -S python
 ```
 
-ubuntu:
+Ubuntu:
 ```bash
 sudo apt install python
 ```
 
-fedora: 
+Fedora: 
 ```bash
 sudo dnf install python
 ```
 
-gentoo:
+Gentoo:
 ```bash
 sudo emerge python
 ```
