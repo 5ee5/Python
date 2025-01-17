@@ -5,7 +5,8 @@ import random
 pygame.init()
 
 # Screen dimensions
-width, height = 600, 400
+#width, height = 600, 400
+width, height = 800, 600
 window = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Snake Game")
 
@@ -46,13 +47,13 @@ while not game_over:
         if event.type == pygame.QUIT:
             game_over = True
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_LEFT and x_change == 0:
                 x_change, y_change = -snake_block, 0
-            elif event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_RIGHT and x_change == 0:
                 x_change, y_change = snake_block, 0
-            elif event.key == pygame.K_UP:
+            elif event.key == pygame.K_UP and y_change == 0:
                 x_change, y_change = 0, -snake_block
-            elif event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_DOWN and y_change == 0:
                 x_change, y_change = 0, snake_block
 
     # Update the snake's position
