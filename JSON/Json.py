@@ -5,4 +5,5 @@ with open('/home/e5/Code/Python/JSON/data.json', 'r') as file:
     data = json.load(file)
 
 # Print the data
-print(data)
+for student in data['students']:
+    print('Name:', student['name'])
