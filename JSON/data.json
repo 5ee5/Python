@@ -1,0 +1,20 @@
+{
+    "schoolName": "Tehnoloģijas Vidusskola",
+    "students": [
+        {
+            "name": "Anna",
+            "age": 16,
+            "grade": 10            
+        }, 
+        {
+            "name": "Oskars",
+            "age": 16,
+            "grade": 10
+        }, 
+        {
+            "name": "Linda",
+            "age": 18,
+            "grade": 12
+        }
+    ]
+}
