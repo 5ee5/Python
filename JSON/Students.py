@@ -1,14 +1,26 @@
 import json
 
-# Open and read the JSON file
-with open('/home/e5/Code/Python/JSON/Students.json', 'r') as file:
+# Load data from JSON file
+with open('/home/e5/Code/Python/JSON/Students.json') as file:
     data = json.load(file)
 
-# Print the data
-for student in data['students']:
-    print('Name:', student['name'], "age:", student['age'], "Grade:", student['grade'])
+# Calculate average age of students
+Ages = [int(student['Age']) for student in data['Students']]
+average_age = sum(Ages) / len(Ages) if Ages else 0
 
-TotalAge = sum([student['age'] for student in data['students']])
-AverageAge = TotalAge / len(data['students'])
+# Print the average age
+print(f"The average age of students is: {average_age}")
 
-print(f"Average age: {AverageAge:.2f}")
+# Calculate average SAT scores by state
+sat_scores_by_state = {}
+for student in data['Students']:
+    state = student['State']
+    sat_score = int(student['SAT'])
+    if state not in sat_scores_by_state:
+        sat_scores_by_state[state] = []
+    sat_scores_by_state[state].append(sat_score)
+
+# Calculate and print average SAT scores
+for state, scores in sat_scores_by_state.items():
+    average_sat = sum(scores) / len(scores) if scores else 0
+    print(f"The average SAT score in {state} is: {average_sat:.2f}")
