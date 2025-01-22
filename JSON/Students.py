@@ -1,7 +1,7 @@
 import json
 
 # Open and read the JSON file
-with open('/home/e5/Code/Python/JSON/students.json', 'r') as file:
+with open('/home/e5/Code/Python/JSON/Schools.json', 'r') as file:
     data = json.load(file)
 
 # Print the data
