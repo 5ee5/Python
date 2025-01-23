@@ -1,7 +1,7 @@
 import json
 
 # Load data from JSON file
-with open('/home/e5/Code/Python/JSON/Students.json') as file:
+with open('/home/e5/Code/Python/JSON/Student_Scores.json') as file:
     data = json.load(file)
 
 # Calculate average age of students
