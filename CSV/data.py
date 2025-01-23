@@ -1,6 +1,6 @@
 import csv
 
-file_path = "/home/minka69btw/Code/Python/school_data/vps_ce_rezultati_vsk_2022_2023.csv"
+file_path = "/home/e5/Code/Python/CSV/Exam.csv"
 
 with open(file_path, mode='r', newline='', encoding='utf-8') as file:
     csv_reader = csv.reader(file, delimiter = ";")
