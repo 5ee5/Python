@@ -15,7 +15,7 @@ while attempts > 0 and '_' in word_display:
             if letter == guess:
                 word_display[index] = guess
     else:
-        print("Wrong that letter does not appear in the word. IDIOT!")
+        print("Wrong! That letter does not appear in the word.")
         attempts -= 1
 
 if "_" not in word_display:
