@@ -1,17 +1,18 @@
-
-# contacts = [['Anna', '987654321'], ['Oskars', '123456789'], ['Jenifere', '654987321']]
 contacts_dictionary = {
         "contacts": [
             {
              "name": "Anna",
+             "surname":"Doe",
              "number": "987654321"
             },
             {
              "name": "Oscar",
+             "surname": "Doe",
              "number": "123456789"
             },
             {
              "name": "Jenny",
+             "surname": "Doe",
              "number": "654987321"
             }
             ]
@@ -23,8 +24,15 @@ while True:
     if response == '1':
         print('Adding new contact')
         name = input("Enter name: ")
+        surname = input("Enter surname: ")
         number = input("Enter number: ")
-        contacts.append([name, number])
+
+        contacts_dictionary["contacts"].append({
+            "name": name,
+            "surname": surname,
+            "number": number
+        })
+
     elif response == '2':
         print('Printing all contacts')
         for contact in contacts:
