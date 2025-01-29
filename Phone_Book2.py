@@ -1,3 +1,6 @@
+import json
+
+
 contacts_dictionary = {
         "contacts": [
             {
@@ -35,18 +38,18 @@ while True:
 
     elif response == '2':
         print('Printing all contacts')
-        for contact in contacts:
-            print(f"{contact[0]} {contact[1]}")
+        for contact in contacts_dictionary["contacts"]:
+            print(contact)
 
     elif response == '3':
         int(input('Enter the index of the contact you want to delete: '))
-        print('Deleting contact')
-        if index < len(contacts):
-            contacts.pop(index)
-        else:
-            print('Index not found')
 
     elif response == '0':
+        filename = "contacts.json"
+
+        with open(filename, 'w') as json_file:
+            json.dump(contacts_dictionary, json_file, indent=4)
+
         print('Exiting')
         break
     else:
