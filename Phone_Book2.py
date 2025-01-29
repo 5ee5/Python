@@ -2,9 +2,18 @@
 # contacts = [['Anna', '987654321'], ['Oskars', '123456789'], ['Jenifere', '654987321']]
 contacts_dictionary = {
         "contacts": [
-            {"name": "Anna", "number": "987654321"},
-            {"name": "Oskars", "number": "123456789"},
-            {"name": "Jenny", "number": "654987321"}
+            {
+             "name": "Anna",
+             "number": "987654321"
+            },
+            {
+             "name": "Oscar",
+             "number": "123456789"
+            },
+            {
+             "name": "Jenny",
+             "number": "654987321"
+            }
             ]
         }
 
