@@ -1,0 +1,23 @@
+{
+    "StoreName": "Shop",
+    "StoreType": "Food",
+    "Products":[
+        "Bread",{
+            "ProductCode": 578982,
+            "Amount": 3,
+            "Price": 0.67
+        },
+        "Cookies",{
+            "ProductCode": 274682,
+            "Amount": 58,
+            "Price": 1.99
+        },
+    
+    "Apple",{
+        "ProductCode": 87739,
+        "Amount": 90,
+        "Price": 8.99
+    }
+
+    ]    
+}
