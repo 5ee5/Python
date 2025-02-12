@@ -1,9 +1,3 @@
-def greetings(greeting, name):
-    print(f"{greeting} {name}!")
-
-def sum(a, b):
-    print(f"sum is {a + b}")
-
 def length(word):
     length = len(word)
 
