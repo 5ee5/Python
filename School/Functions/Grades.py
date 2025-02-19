@@ -7,7 +7,7 @@ def list_sum(list_to_sum: list):
 
     return sum
 
-def list_lenght(list_with_numbers):
+def list_lenght(list_with_numbers: list):
     return len(list_with_numbers)
 
 print(f"The average of the grades is {list_sum(grades) / list_lenght(grades)}")
