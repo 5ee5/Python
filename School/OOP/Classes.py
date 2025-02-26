@@ -12,11 +12,8 @@ class Car:
     def __repr__(self):
         return f"{self.color} {self.brand}"
 
-person1 = Person("Anna", 17)
-person2 = Person("Oskars", 18)
+Person.name = "Jolanta"
+Person.age = 25
+Person.cars = {Car("Volvo", "Black"), Car ("Tesla", "White")}
 
-person1.name = "Jolanta"
-person1.cars = [Car("Volvo", "Black"), Car("Tesla", "White")]
-person2.cars = [Car("Subaru", "Blue")]
-
-print(person1.cars)
+print(f"{Person.name},is {Person.age} years old, and own {Person.cars}")
