@@ -1,7 +1,8 @@
 class Person:
-    def __init__(self, name, age):
+    def __init__(self, name, age, gender):
         self.name = name
         self.age = age
+        self.gender = gender
         self.cars = []
 
 class Car:
@@ -12,8 +13,9 @@ class Car:
     def __repr__(self):
         return f"{self.color} {self.brand}"
 
-Person.name = "Jolanta"
-Person.age = 25
-Person.cars = {Car("Volvo", "Black"), Car ("Tesla", "White")}
+John = Person("Jonh", 25, "male")
 
-print(f"{Person.name},is {Person.age} years old, and own {Person.cars}")
+John.cars.append (Car ("BMW", "Black"))
+John.cars.append (Car ("Tesla", "White"))
+
+print(f"{John.name}, is {John.age} year old {John.gender}, and own {John.cars}")
