@@ -4,6 +4,13 @@ class Person:
         self.age = age
         self.gender = gender
         self.cars = []
+        print(f"I'm a new person: {self.name}!")
+
+    def __repr__(self):
+        return f"{self.name} {self.age}"
+
+    def introduce(self):
+        print(f"Hello, my name is {self.name} and I'm {self.age} years old")
 
 class Car:
     def __init__(self, brand, color):
@@ -13,9 +20,14 @@ class Car:
     def __repr__(self):
         return f"{self.color} {self.brand}"
 
-John = Person("Jonh", 25, "male")
+# Correct object creation
+Anna = Person("Anna", 30, "female")
+Anna.introduce()
 
-John.cars.append (Car ("BMW", "Black"))
-John.cars.append (Car ("Tesla", "White"))
+John = Person("John", 25, "male")
 
-print(f"{John.name}, is {John.age} year old {John.gender}, and own {John.cars}")
+John.cars.append(Car("BMW", "Black"))
+John.cars.append(Car("Tesla", "White"))
+
+print(f"{John.name} is a {John.age}-year-old {John.gender}, and owns {John.cars}")
+
