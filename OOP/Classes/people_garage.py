@@ -1,16 +1,33 @@
+import datetime
+
 class Person:
-    def __init__(self, name, age, gender):
+    def __init__(self, name, age):
         self.name = name
-        self.age = age
-        self.gender = gender
+        self.age = age        
         self.cars = []
-        print(f"I'm a new person: {self.name}!")
+        print(f"Hey hey I am a new person {self.name}!")
 
     def __repr__(self):
         return f"{self.name} {self.age}"
-
+    
     def introduce(self):
-        print(f"Hello, my name is {self.name} and I'm {self.age} years old")
+        print(f"Hello, my name is {self.name} and I am {self.age} years old.")
+
+    def add_driving_licence(self, driving_licence):
+        if self.age <= 18:
+            print(f"{self.name}, you are too young to get a driving licence!")
+        else:
+            self.driving_licence = driving_licence
+            print(f"The driving licence is successfully issued to {self.name}!")
+
+
+class DrivingLicence:
+    def __init__(self, number, category, expiry_date):
+        self.number = number
+        self.category = category
+        self.issue_date = datetime.date
+        self.expiry_date = expiry_date
+
 
 class Car:
     def __init__(self, brand, color):
@@ -20,14 +37,12 @@ class Car:
     def __repr__(self):
         return f"{self.color} {self.brand}"
 
-# Correct object creation
-Anna = Person("Anna", 30, "female")
-Anna.introduce()
+person1 = Person("Anna", 20)
+person2 = Person("Mark", 18)
 
-John = Person("John", 25, "male")
+person1.add_driving_licence(DrivingLicence("LV1234567", "B", "01/01/2028"))
 
-John.cars.append(Car("BMW", "Black"))
-John.cars.append(Car("Tesla", "White"))
+person1.cars = [Car("Volvo", "Black"), Car("Tesla", "White")]
+person2.cars = [Car("Subaru", "Blue")]
 
-print(f"{John.name} is a {John.age}-year-old {John.gender}, and owns {John.cars}")
-
+print(person1.cars)
