@@ -14,6 +14,7 @@ from pygame.locals import (
     K_s,
     K_d,
     K_e,
+    K_r,
 )
 
 SCREEN_WIDTH = 800
@@ -60,6 +61,14 @@ def updateShip(pressed_keys):
         ship.rect.top = 0
     if ship.rect.bottom >= SCREEN_HEIGHT:
         ship.rect.bottom = SCREEN_HEIGHT
+
+def teleportShip():
+    while True:
+        new_x = random.randint(0, SCREEN_WIDTH - ship.rect.width)
+        new_y = random.randint(0, SCREEN_HEIGHT - ship.rect.height)
+        ship.rect.topleft = (new_x, new_y)
+        if not pygame.sprite.spritecollideany(ship, enemies):
+            break
 
 CREATING_ENEMY_TIME_INTERVAL = 250
 ADDENEMY = pygame.USEREVENT + 1
@@ -121,6 +130,9 @@ while running:
             enemies_paused = False
     else:
         updateEnemies()
+
+    if pressed_keys[K_r]:
+        teleportShip()
 
     bullets.update()
 
