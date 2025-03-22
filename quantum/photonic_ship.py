@@ -21,14 +21,14 @@ from pygame.locals import (
 )
 
 SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 640  # Double the original height
+SCREEN_HEIGHT = 640
 
 score = 0
 quantum_mode = False
 ship_state = "|0>"
 last_gate_applied = ""
 gate_display_timer = 0
-GATE_DISPLAY_DURATION = 60  # Duration to display the gate text (in frames)
+GATE_DISPLAY_DURATION = 60
 
 pygame.init()
 screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
@@ -194,7 +194,6 @@ while running:
             createEnemy()
     screen.fill((0, 0, 0))
 
-    # Draw a line in the middle of the screen
     pygame.draw.line(screen, (255, 255, 255), (0, SCREEN_HEIGHT // 2), (SCREEN_WIDTH, SCREEN_HEIGHT // 2))
 
     score += 1
