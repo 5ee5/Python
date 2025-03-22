@@ -303,5 +303,8 @@ while running:
         gate_display_timer -= 1
 
     pygame.display.flip()
-    if there_is_message: pygame.time.wait(2000)
+
+    if there_is_message:
+        pygame.time.wait(2000)
+    
     pygame.time.Clock().tick(30)
