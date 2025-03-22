@@ -44,9 +44,9 @@ CREATING_ENEMY_TIME_INTERVAL = 250
 ADDENEMY = pygame.USEREVENT + 1
 pygame.time.set_timer(ADDENEMY, CREATING_ENEMY_TIME_INTERVAL)
 
-enemies = pygame.sprite.Group() # keep all enemies - the enemies will be added automatically
-all_sprites = pygame.sprite.Group() # keep all enemies and ship(s)
-all_sprites.add(ship) # add ship to the group of all sprites
+enemies = pygame.sprite.Group()
+all_sprites = pygame.sprite.Group()
+all_sprites.add(ship)
 
 def createEnemy():
     enemy = pygame.sprite.Sprite() 
