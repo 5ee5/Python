@@ -8,6 +8,7 @@ from pygame.locals import (
     K_RIGHT,
     K_ESCAPE,
     K_SPACE,
+    K_f,
 )
 
 SCREEN_WIDTH = 800
@@ -82,19 +83,20 @@ def updateEnemies():
             enemy.kill()
 
 there_is_message = False
+enemies_paused = False
+pause_timer = 0
 
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == ADDENEMY:
+        elif event.type == ADDENEMY and not enemies_paused:
             createEnemy()
     screen.fill((0, 0, 0))
 
     score += 1
 
-    updateEnemies()
     pressed_keys = pygame.key.get_pressed()
     if pressed_keys[K_ESCAPE]: running = False
     updateShip(pressed_keys)
@@ -103,6 +105,17 @@ while running:
         bullet = Bullet(ship.rect.right, ship.rect.centery)
         bullets.add(bullet)
         all_sprites.add(bullet)
+
+    if pressed_keys[K_f] and not enemies_paused:
+        enemies_paused = True
+        pause_timer = 60 
+
+    if enemies_paused:
+        pause_timer -= 1
+        if pause_timer <= 0:
+            enemies_paused = False
+    else:
+        updateEnemies()
 
     bullets.update()
 
