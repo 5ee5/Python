@@ -7,6 +7,7 @@ from pygame.locals import (
     K_LEFT,
     K_RIGHT,
     K_ESCAPE,
+    K_SPACE,
 )
 
 SCREEN_WIDTH = 800
@@ -18,11 +19,22 @@ pygame.init()
 screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
 score_font = pygame.font.SysFont('Comic Sans MS', 30)
 
-
 ship = pygame.sprite.Sprite()
 ship.surf = pygame.Surface((60, 20))
 ship.surf.fill((255, 255, 255))
 ship.rect = ship.surf.get_rect()
+
+class Bullet(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        super(Bullet, self).__init__()
+        self.surf = pygame.Surface((10, 5))
+        self.surf.fill((255, 255, 0))
+        self.rect = self.surf.get_rect(center=(x, y))
+
+    def update(self):
+        self.rect.move_ip(10, 0)
+        if self.rect.left > SCREEN_WIDTH:
+            self.kill()
 
 def updateShip(pressed_keys):
     if pressed_keys[K_UP]:
@@ -43,22 +55,22 @@ def updateShip(pressed_keys):
     if ship.rect.bottom >= SCREEN_HEIGHT:
         ship.rect.bottom = SCREEN_HEIGHT
 
-
 CREATING_ENEMY_TIME_INTERVAL = 250
 ADDENEMY = pygame.USEREVENT + 1
 pygame.time.set_timer(ADDENEMY, CREATING_ENEMY_TIME_INTERVAL)
 
 enemies = pygame.sprite.Group()
+bullets = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 all_sprites.add(ship)
 
 def createEnemy():
-    enemy = pygame.sprite.Sprite() 
+    enemy = pygame.sprite.Sprite()
     enemy.surf = pygame.Surface((20, 10))
     enemy.surf.fill((255, 0, 0))
     enemy_X = random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100)
     enemy_Y = random.randint(0, SCREEN_HEIGHT)
-    enemy.rect = enemy.surf.get_rect(center=(enemy_X,enemy_Y))
+    enemy.rect = enemy.surf.get_rect(center=(enemy_X, enemy_Y))
     enemy.speed = random.randint(5, 20)
     enemies.add(enemy)
     all_sprites.add(enemy)
@@ -68,7 +80,6 @@ def updateEnemies():
         enemy.rect.move_ip(-enemy.speed, 0)
         if enemy.rect.right < 0:
             enemy.kill()
-
 
 there_is_message = False
 
@@ -88,13 +99,26 @@ while running:
     if pressed_keys[K_ESCAPE]: running = False
     updateShip(pressed_keys)
 
+    if pressed_keys[K_SPACE]:
+        bullet = Bullet(ship.rect.right, ship.rect.centery)
+        bullets.add(bullet)
+        all_sprites.add(bullet)
+
+    bullets.update()
+
+    for bullet in bullets:
+        enemies_hit = pygame.sprite.spritecollide(bullet, enemies, True)
+        if enemies_hit:
+            bullet.kill()
+            score += 10
+
     if pygame.sprite.spritecollideany(ship, enemies):
         ship.kill()
         running = False
         my_font = pygame.font.SysFont('Comic Sans MS', 48)
         text_surface = my_font.render("Game Over! ", False, (255, 0, 0), (0, 0, 0))
-        screen.blit( text_surface, (SCREEN_WIDTH // 3,SCREEN_HEIGHT // 3) )
-        there_is_message = True 
+        screen.blit(text_surface, (SCREEN_WIDTH // 3, SCREEN_HEIGHT // 3))
+        there_is_message = True
 
     for entity in all_sprites:
         screen.blit(entity.surf, entity.rect)
