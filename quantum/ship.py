@@ -12,8 +12,12 @@ from pygame.locals import (
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 320
 
+score = 0
+
 pygame.init()
 screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
+score_font = pygame.font.SysFont('Comic Sans MS', 30)
+
 
 ship = pygame.sprite.Sprite()
 ship.surf = pygame.Surface((60, 20))
@@ -77,6 +81,8 @@ while running:
             createEnemy()
     screen.fill((0, 0, 0))
 
+    score += 1
+
     updateEnemies()
     pressed_keys = pygame.key.get_pressed()
     if pressed_keys[K_ESCAPE]: running = False
@@ -92,8 +98,9 @@ while running:
 
     for entity in all_sprites:
         screen.blit(entity.surf, entity.rect)
+    score_surface = score_font.render(str(score), False, (255, 255, 255))
+    screen.blit(score_surface, (730, 10))
 
     pygame.display.flip()
     if there_is_message: pygame.time.wait(2000)
     pygame.time.Clock().tick(30)
- 
