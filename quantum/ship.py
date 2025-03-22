@@ -9,6 +9,11 @@ from pygame.locals import (
     K_ESCAPE,
     K_SPACE,
     K_f,
+    K_w,
+    K_a,
+    K_s,
+    K_d,
+    K_e,
 )
 
 SCREEN_WIDTH = 800
@@ -38,13 +43,13 @@ class Bullet(pygame.sprite.Sprite):
             self.kill()
 
 def updateShip(pressed_keys):
-    if pressed_keys[K_UP]:
+    if pressed_keys[K_UP] or pressed_keys[K_w]:
         ship.rect.move_ip(0, -5)
-    if pressed_keys[K_DOWN]:
+    if pressed_keys[K_DOWN] or pressed_keys[K_s]:
         ship.rect.move_ip(0, 5)
-    if pressed_keys[K_LEFT]:
+    if pressed_keys[K_LEFT] or pressed_keys[K_a]:
         ship.rect.move_ip(-5, 0)
-    if pressed_keys[K_RIGHT]:
+    if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
         ship.rect.move_ip(5, 0)
 
     if ship.rect.left < 0:
@@ -101,7 +106,7 @@ while running:
     if pressed_keys[K_ESCAPE]: running = False
     updateShip(pressed_keys)
 
-    if pressed_keys[K_SPACE]:
+    if pressed_keys[K_SPACE] or pressed_keys[K_e]:
         bullet = Bullet(ship.rect.right, ship.rect.centery)
         bullets.add(bullet)
         all_sprites.add(bullet)
