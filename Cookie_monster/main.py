@@ -24,16 +24,16 @@ while running:
             running = False
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                 monsterx_change = 2.5
                 monstery_change = 0
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_a:
                 monsterx_change = -2.5
                 monstery_change = 0
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_UP or event.key == pygame.K_w:
                 monsterx_change = 0
                 monstery_change = -2.5
-            if event.key == pygame.K_DOWN:
+            if event.key == pygame.K_DOWN or event.key == pygame.K_s:
                 monsterx_change = 0
                 monstery_change = 2.5
 
