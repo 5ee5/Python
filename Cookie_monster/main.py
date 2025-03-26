@@ -12,10 +12,10 @@ icon = pygame.image.load('Python/Cookie_monster/assets/cookie.png')
 pygame.display.set_icon(icon)
 
 monster = pygame.image.load('Python/Cookie_monster/assets/monster.png')
-monsterx = 350
-monstery = 350
-monsterx_change = 0
-monstery_change = 0
+monsterX = 350
+monsterY = 350
+monsterX_change = 0
+monsterX_change = 0
 
 clock = pygame.time.Clock()
 
@@ -27,21 +27,31 @@ while running:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
-                monsterx_change = 2.5
-                monstery_change = 0
+                monsterX_change = 2.5
+                monsterY_change = 0
             if event.key == pygame.K_LEFT or event.key == pygame.K_a:
-                monsterx_change = -2.5
-                monstery_change = 0
+                monsterX_change = -2.5
+                monsterY_change = 0
             if event.key == pygame.K_UP or event.key == pygame.K_w:
-                monsterx_change = 0
-                monstery_change = -2.5
+                monsterX_change = 0
+                monsterY_change = -2.5
             if event.key == pygame.K_DOWN or event.key == pygame.K_s:
-                monsterx_change = 0
-                monstery_change = 2.5
+                monsterX_change = 0
+                monsterY_change = 2.5
 
 
-    monsterx += monsterx_change
-    monstery += monstery_change
+    monsterx += monsterX_change
+    monstery += monsterY_change
+
+    if monsterX < 0:
+        monsterX = 0
+    elif monsterY < 0:
+        monsterY = 0
+    if monsterX > 735:
+        monsterX = 735
+    elif monsterX > 635:
+        monsterY = 635
+    
     window.blit(monster, (monsterx, monstery))
     window.fill('#00ffff')
     window.blit(monster, (monsterx, monstery))
