@@ -2,8 +2,10 @@ import pygame
 import sys
 
 pygame.init()
+windowX = 800
+windowY = 700
 
-window = pygame.display.set_mode((800, 700))
+window = pygame.display.set_mode((windowX, windowY))
 pygame.display.set_caption("Cookie Monster")
 
 icon = pygame.image.load('Python/Cookie_monster/assets/cookie.png')
@@ -43,6 +45,7 @@ while running:
     window.blit(monster, (monsterx, monstery))
     window.fill('#00ffff')
     window.blit(monster, (monsterx, monstery))
+
     pygame.display.update()
     
     clock.tick(60)
