@@ -9,6 +9,12 @@ pygame.display.set_caption("Cookie Monster")
 icon = pygame.image.load('Python/Cookie_monster/assets/cookie.png')
 pygame.display.set_icon(icon)
 
+monster = pygame.image.load('Python/Cookie_monster/assets/monster.png')
+monsterx = 350
+monstery = 350
+monsterx_change = 0
+monstery_change = 0
+
 clock = pygame.time.Clock()
 
 running = True
@@ -17,7 +23,26 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RIGHT:
+                monsterx_change = 2.5
+                monstery_change = 0
+            if event.key == pygame.K_LEFT:
+                monsterx_change = -2.5
+                monstery_change = 0
+            if event.key == pygame.K_UP:
+                monsterx_change = 0
+                monstery_change = -2.5
+            if event.key == pygame.K_DOWN:
+                monsterx_change = 0
+                monstery_change = 2.5
+
+
+    monsterx += monsterx_change
+    monstery += monstery_change
+    window.blit(monster, (monsterx, monstery))
     window.fill('#00ffff')
+    window.blit(monster, (monsterx, monstery))
     pygame.display.update()
     
     clock.tick(60)
