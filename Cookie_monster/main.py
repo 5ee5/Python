@@ -15,7 +15,9 @@ monster = pygame.image.load('Python/Cookie_monster/assets/monster.png')
 monsterX = 350
 monsterY = 350
 monsterX_change = 0
-monsterX_change = 0
+monsterY_change = 0
+
+cookie = pygame.image.load('Python/Cookie_monster/assets/cookie.png')
 
 clock = pygame.time.Clock()
 
@@ -40,8 +42,8 @@ while running:
                 monsterY_change = 2.5
 
 
-    monsterx += monsterX_change
-    monstery += monsterY_change
+    monsterX += monsterX_change
+    monsterY += monsterY_change
 
     if monsterX < 0:
         monsterX = 0
@@ -52,9 +54,9 @@ while running:
     elif monsterX > 635:
         monsterY = 635
     
-    window.blit(monster, (monsterx, monstery))
+    window.blit(monster, (monsterX, monsterY))
     window.fill('#00ffff')
-    window.blit(monster, (monsterx, monstery))
+    window.blit(monster, (monsterX, monsterY))
 
     pygame.display.update()
     
