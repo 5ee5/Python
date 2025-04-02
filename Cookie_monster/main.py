@@ -19,12 +19,15 @@ monsterX = 350
 monsterY = 350
 monsterX_change = 0
 monsterY_change = 0
+score = 0
 
 cookie = pygame.image.load('Python/Cookie_monster/assets/cookie.png')
 cookie = pygame.transform.scale(cookie, (50, 50))
 cookieX = random.randint(0, 636)
 cookieY = random.randint(0, 436)
 cookie_is_eaten = False
+
+font = pygame.font.Font(None, 36)
 
 while not cookie_is_eaten:
 
@@ -75,10 +78,15 @@ while running:
 
     if cookie_is_eaten(monsterX, monsterY, cookieX, cookieY):
         cookieX = random.randint(0, 636)
-        cookieY = random.randint(0, 436)        
+        cookieY = random.randint(0, 436)
+        score += 1      
     
     window.blit(monster, (monsterX, monsterY))
     window.blit(cookie, (cookieX, cookieY))
+
+    score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+    window.blit(score_text, (10, 10))
+    
     pygame.display.update()
     
     clock.tick(60)
