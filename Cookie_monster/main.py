@@ -21,15 +21,18 @@ monsterX_change = 0
 monsterY_change = 0
 score = 0
 
-cookie = pygame.image.load('assets/cookie.png')
-cookie = pygame.transform.scale(cookie, (50, 50))
-cookieX = random.randint(0, 636)
-cookieY = random.randint(0, 436)
+cookie_img = pygame.image.load('assets/cookie.png')
+cookie_img = pygame.transform.scale(cookie_img, (50, 50))
+
+num_cookies = 5
+cookies = []
+for _ in range(num_cookies):
+    x = random.randint(0, 750 - 50)
+    y = random.randint(0, 650 - 50)
+    cookies.append([x, y])
 
 font = pygame.font.Font(None, 36)
-
 start_ticks = pygame.time.get_ticks()
-
 clock = pygame.time.Clock()
 
 def cookie_is_eaten(monsterX, monsterY, cookieX, cookieY):
@@ -39,25 +42,25 @@ def cookie_is_eaten(monsterX, monsterY, cookieX, cookieY):
 running = True
 while running:
     window.blit(background, (0, 0))
-    
+
     seconds_passed = (pygame.time.get_ticks() - start_ticks) / 1000
     countdown = max(0, 30 - int(seconds_passed))
-    
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
+            if event.key in [pygame.K_RIGHT, pygame.K_d]:
                 monsterX_change = 2.5
                 monsterY_change = 0
-            if event.key == pygame.K_LEFT or event.key == pygame.K_a:
+            if event.key in [pygame.K_LEFT, pygame.K_a]:
                 monsterX_change = -2.5
                 monsterY_change = 0
-            if event.key == pygame.K_UP or event.key == pygame.K_w:
+            if event.key in [pygame.K_UP, pygame.K_w]:
                 monsterX_change = 0
                 monsterY_change = -2.5
-            if event.key == pygame.K_DOWN or event.key == pygame.K_s:
+            if event.key in [pygame.K_DOWN, pygame.K_s]:
                 monsterX_change = 0
                 monsterY_change = 2.5
 
@@ -73,13 +76,14 @@ while running:
     elif monsterY > 635:
         monsterY = 635
 
-    if cookie_is_eaten(monsterX, monsterY, cookieX, cookieY):
-        cookieX = random.randint(0, 636)
-        cookieY = random.randint(0, 436)
-        score += 1
+    for i in range(len(cookies)):
+        if cookie_is_eaten(monsterX, monsterY, cookies[i][0], cookies[i][1]):
+            score += 1
+            cookies[i] = [random.randint(0, 750 - 50), random.randint(0, 650 - 50)]
 
     window.blit(monster, (monsterX, monsterY))
-    window.blit(cookie, (cookieX, cookieY))
+    for cookieX, cookieY in cookies:
+        window.blit(cookie_img, (cookieX, cookieY))
 
     score_text = font.render(f"Score: {score}", True, (255, 255, 255))
 
@@ -95,7 +99,7 @@ while running:
         window.blit(score_text, (10, 10))
         window.blit(time_text, (10, 50))
         pygame.display.update()
-    
+
     clock.tick(60)
 
 pygame.quit()
