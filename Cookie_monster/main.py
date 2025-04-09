@@ -9,19 +9,19 @@ windowY = 700
 window = pygame.display.set_mode((windowX, windowY))
 pygame.display.set_caption("Cookie Monster")
 
-icon = pygame.image.load('Python/Cookie_monster/assets/cookie.png')
+icon = pygame.image.load('assets/cookie.png')
 pygame.display.set_icon(icon)
 
-background = pygame.image.load('Python/Cookie_monster/assets/underground.png')
+background = pygame.image.load('assets/underground.png')
 background = pygame.transform.scale(background, (windowX, windowY))
-monster = pygame.image.load('Python/Cookie_monster/assets/monster.png')
+monster = pygame.image.load('assets/monster.png')
 monsterX = 350
 monsterY = 350
 monsterX_change = 0
 monsterY_change = 0
 score = 0
 
-cookie = pygame.image.load('Python/Cookie_monster/assets/cookie.png')
+cookie = pygame.image.load('assets/cookie.png')
 cookie = pygame.transform.scale(cookie, (50, 50))
 cookieX = random.randint(0, 636)
 cookieY = random.randint(0, 436)
