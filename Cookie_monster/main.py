@@ -41,7 +41,7 @@ while running:
     window.blit(background, (0, 0))
     
     seconds_passed = (pygame.time.get_ticks() - start_ticks) / 1000
-    countdown = max(0, 20 - int(seconds_passed))
+    countdown = max(0, 30 - int(seconds_passed))
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
