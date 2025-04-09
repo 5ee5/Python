@@ -25,26 +25,24 @@ cookie = pygame.image.load('Python/Cookie_monster/assets/cookie.png')
 cookie = pygame.transform.scale(cookie, (50, 50))
 cookieX = random.randint(0, 636)
 cookieY = random.randint(0, 436)
-cookie_is_eaten = False
 
 font = pygame.font.Font(None, 36)
 
-while not cookie_is_eaten:
-
-    def cookie_is_eaten(monsterX, monsterY, cookieX, cookieY):
-        distance = ((monsterX - cookieX) ** 2 + (monsterY - cookieY) ** 2) ** 0.5
-        if distance <= 48:
-            return True
-        return False
+start_ticks = pygame.time.get_ticks()
 
 clock = pygame.time.Clock()
 
-bg_x = (windowX - background.get_width()) // 2
-bg_y = (windowY - background.get_height()) // 2
+def cookie_is_eaten(monsterX, monsterY, cookieX, cookieY):
+    distance = ((monsterX - cookieX)**2 + (monsterY - cookieY)**2)**0.5
+    return distance <= 48
 
 running = True
 while running:
-    window.blit(background, (bg_x, bg_y))
+    window.blit(background, (0, 0))
+    
+    seconds_passed = (pygame.time.get_ticks() - start_ticks) / 1000
+    countdown = max(0, 20 - int(seconds_passed))
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -63,7 +61,6 @@ while running:
                 monsterX_change = 0
                 monsterY_change = 2.5
 
-
     monsterX += monsterX_change
     monsterY += monsterY_change
 
@@ -79,15 +76,25 @@ while running:
     if cookie_is_eaten(monsterX, monsterY, cookieX, cookieY):
         cookieX = random.randint(0, 636)
         cookieY = random.randint(0, 436)
-        score += 1      
-    
+        score += 1
+
     window.blit(monster, (monsterX, monsterY))
     window.blit(cookie, (cookieX, cookieY))
 
     score_text = font.render(f"Score: {score}", True, (255, 255, 255))
-    window.blit(score_text, (10, 10))
-    
-    pygame.display.update()
+
+    if countdown == 0:
+        time_text = font.render("Time's up!", True, (255, 0, 0))
+        window.blit(score_text, (10, 10))
+        window.blit(time_text, (10, 50))
+        pygame.display.update()
+        pygame.time.wait(3000)
+        running = False
+    else:
+        time_text = font.render(f"Time: {countdown}", True, (255, 255, 255))
+        window.blit(score_text, (10, 10))
+        window.blit(time_text, (10, 50))
+        pygame.display.update()
     
     clock.tick(60)
 
