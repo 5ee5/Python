@@ -2,6 +2,7 @@ import pygame
 import sys
 import random
 
+# Initialize Pygame
 pygame.init()
 windowX = 800
 windowY = 700
@@ -9,6 +10,7 @@ windowY = 700
 window = pygame.display.set_mode((windowX, windowY))
 pygame.display.set_caption("Cookie Monster")
 
+# Load assets
 icon = pygame.image.load('assets/cookie.png')
 pygame.display.set_icon(icon)
 
@@ -24,21 +26,24 @@ score = 0
 cookie_img = pygame.image.load('assets/cookie.png')
 cookie_img = pygame.transform.scale(cookie_img, (50, 50))
 
+# Generate cookies
 num_cookies = 5
 cookies = []
 for _ in range(num_cookies):
-    x = random.randint(0, 750 - 50)
-    y = random.randint(0, 650 - 50)
-    cookies.append([x, y])
+    cookieX = random.randint(0, 750 - 50)
+    cookieY = random.randint(0, 650 - 50)
+    cookies.append({'img': cookie_img, 'x': cookieX, 'y': cookieY})
 
 font = pygame.font.Font(None, 36)
 start_ticks = pygame.time.get_ticks()
 clock = pygame.time.Clock()
 
+# Collision detection
 def cookie_is_eaten(monsterX, monsterY, cookieX, cookieY):
     distance = ((monsterX - cookieX)**2 + (monsterY - cookieY)**2)**0.5
     return distance <= 48
 
+# Main game loop
 running = True
 while running:
     window.blit(background, (0, 0))
@@ -67,6 +72,7 @@ while running:
     monsterX += monsterX_change
     monsterY += monsterY_change
 
+    # Boundary checking
     if monsterX < 0:
         monsterX = 0
     elif monsterY < 0:
@@ -76,14 +82,19 @@ while running:
     elif monsterY > 635:
         monsterY = 635
 
-    for i in range(len(cookies)):
-        if cookie_is_eaten(monsterX, monsterY, cookies[i][0], cookies[i][1]):
+    # Check for cookie collisions
+    for i, cookie in enumerate(cookies):
+        if cookie_is_eaten(monsterX, monsterY, cookie['x'], cookie['y']):
             score += 1
-            cookies[i] = [random.randint(0, 750 - 50), random.randint(0, 650 - 50)]
+            cookies[i] = {
+                'img': cookie_img,
+                'x': random.randint(0, 750 - 50),
+                'y': random.randint(0, 650 - 50)
+            }
 
     window.blit(monster, (monsterX, monsterY))
-    for cookieX, cookieY in cookies:
-        window.blit(cookie_img, (cookieX, cookieY))
+    for cookie in cookies:
+        window.blit(cookie['img'], (cookie['x'], cookie['y']))
 
     score_text = font.render(f"Score: {score}", True, (255, 255, 255))
 
