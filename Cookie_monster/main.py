@@ -14,13 +14,18 @@ pygame.display.set_caption("Cookie Monster")
 icon = pygame.image.load('assets/cookie.png')
 pygame.display.set_icon(icon)
 
+cookie_sound = pygame.mixer.Sound('assets/cookie_sound.mp3')
+cookie_sound.set_volume(1)
+
 background = pygame.image.load('assets/underground.png')
 background = pygame.transform.scale(background, (windowX, windowY))
+
 monster = pygame.image.load('assets/monster.png')
 monsterX = 350
 monsterY = 350
 monsterX_change = 0
 monsterY_change = 0
+
 score = 0
 
 cookie_img = pygame.image.load('assets/cookie.png')
@@ -42,6 +47,12 @@ clock = pygame.time.Clock()
 def cookie_is_eaten(monsterX, monsterY, cookieX, cookieY):
     distance = ((monsterX - cookieX)**2 + (monsterY - cookieY)**2)**0.5
     return distance <= 48
+    cookie_sound.play()
+
+pygame.mixer.music.load('assets/Background_Music.wav')
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1)
+
 
 # Main game loop
 running = True
