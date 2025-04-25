@@ -1,0 +1,46 @@
+{
+    "schoolName": "Riga High School",
+    "students": [
+        {
+            "name": "Anna",
+            "age": 16,
+            "grade": 10,
+            "subjects": [
+                {
+                    "subjectName": "Biology",
+                    "subjectLevel": 1,
+                    "grades": [
+                        {
+                            "gradeType": "Formative",
+                            "gradeDate": "10/01/2025",
+                            "gradeValue": 8
+                        },
+                        {
+                            "gradeType": "Summative",
+                            "gradeDate": "15/01/2025",
+                            "gradeValue": 9
+                        }
+                    ]
+                },
+                {
+                    "subjectName": "Coding",
+                    "subjectLevel": 2
+                },
+                {
+                    "subjectName": "Physics",
+                    "subjectLevel": 3
+                }
+            ]
+        }, 
+        {
+            "name": "Oskars",
+            "age": 16,
+            "grade": 10
+        }, 
+        {
+            "name": "Linda",
+            "age": 18,
+            "grade": 12
+        }
+    ]
+}
