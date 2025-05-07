@@ -5,7 +5,7 @@ pygame.init()
 
 clock = pygame.time.Clock()
 window = pygame.display.set_mode([500, 500])
-pygame.display.set_caption("Snake Game")
+pygame.display.set_caption("elchin snake 2.v.0")
 
 
 class Snake:
@@ -18,6 +18,7 @@ class Snake:
         self.rectangles.append(pygame.Rect(x, y, 20, 20))
 
     def move(self):
+        # -1 apzīmē pēdējo elementu (čūskas galva)
         x = self.rectangles[-1].left
         y = self.rectangles[-1].top
 
@@ -67,8 +68,12 @@ class Apple:
         
         pygame.draw.rect(window, [255, 0, 0], apple_rect)
 
+# nodefinējam objektu no klases
 snake = Snake(240, 240)
-apple = Apple(50, 100)
+
+apples = []
+for i in range(3):
+    apples.append(Apple(random.randint(0, 485), random.randint(0, 485)))
 
 while True:
     
@@ -96,17 +101,21 @@ while True:
 
     snake.move()
 
-    if apple.is_eaten(snake):
-        snake.length += 1
-        apple.x = random.randint(0, 485)
-        apple.y = random.randint(0, 485)
+    for apple in apples:
+        if apple.is_eaten(snake):
+            snake.length += 1
+            apple.x = random.randint(0, 485)
+            apple.y = random.randint(0, 485)
 
     if snake.is_out_of_bounds(window) or snake.is_crossing_itself():
         pygame.quit()
 
     window.fill([0, 0, 0])
     snake.draw(window)
-    apple.draw(window)
+
+    for apple in apples:
+        apple.draw(window)
+        
     pygame.display.update()
 
     clock.tick(10)
