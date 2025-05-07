@@ -7,6 +7,8 @@ clock = pygame.time.Clock()
 window = pygame.display.set_mode([500, 500])
 pygame.display.set_caption("elchin snake 2.v.0")
 
+font = pygame.font.SysFont(None, 36)
+
 
 class Snake:
 
@@ -18,6 +20,7 @@ class Snake:
         self.rectangles.append(pygame.Rect(x, y, 20, 20))
 
     def move(self):
+        # -1 apzīmē pēdējo elementu (čūskas galva)
         x = self.rectangles[-1].left
         y = self.rectangles[-1].top
 
@@ -67,12 +70,14 @@ class Apple:
         
         pygame.draw.rect(window, [255, 0, 0], apple_rect)
 
-
+# nodefinējam objektu no klases
 snake = Snake(240, 240)
 
 apples = []
 for i in range(3):
     apples.append(Apple(random.randint(0, 485), random.randint(0, 485)))
+
+score = 0
 
 while True:
     
@@ -105,16 +110,38 @@ while True:
             snake.length += 1
             apple.x = random.randint(0, 485)
             apple.y = random.randint(0, 485)
+            score += 1
 
     if snake.is_out_of_bounds(window) or snake.is_crossing_itself():
-        pygame.quit()
+
+        game_over_text = font.render('Game Over! Press R to restart', True, (255, 0, 0))
+        window.fill((0, 0, 0))
+        window.blit(game_over_text, (80, 230))
+        pygame.display.update()
+        # wait till user clicks R for restart
+        waiting = True
+        while waiting:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_r:
+                        snake = Snake(240, 240)
+                        apples = []
+                        for i in range(3):
+                            apples.append(Apple(random.randint(0, 485), random.randint(0, 485)))
+                        score = 0
+                        waiting = False
 
     window.fill([0, 0, 0])
     snake.draw(window)
 
     for apple in apples:
         apple.draw(window)
-        
+
+    score_text = font.render(f'Score: {score}', True, (255, 255, 255))
+    window.blit(score_text, (10, 10))
+
     pygame.display.update()
 
-    clock.tick(10)
+    clock.tick(12)
