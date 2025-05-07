@@ -18,7 +18,6 @@ class Snake:
         self.rectangles.append(pygame.Rect(x, y, 20, 20))
 
     def move(self):
-        # -1 apzīmē pēdējo elementu (čūskas galva)
         x = self.rectangles[-1].left
         y = self.rectangles[-1].top
 
@@ -68,7 +67,7 @@ class Apple:
         
         pygame.draw.rect(window, [255, 0, 0], apple_rect)
 
-# nodefinējam objektu no klases
+
 snake = Snake(240, 240)
 
 apples = []
