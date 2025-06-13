@@ -51,31 +51,29 @@ quiz = [
     }
 ]
 
-import sys
-
 def run_quiz():
     score = 0
     print("Welcome to the Linux Quiz!\n")
     print("Press Enter without typing anything to quit the quiz at any time.\n")
-    
+
     for i, q in enumerate(quiz):
         print(f"Question {i+1}: {q['question']}")
         for option in q['options']:
             print(option)
-        
+
         answer = input("\nYour answer (a/b/c/d): ").strip().lower()
-        
+
         # Check if the user pressed Enter without typing anything
         if answer == "":
             print("\nYou chose to exit the quiz.")
             break  # Exit the loop
-        
+
         if answer == q['answer']:
             print("Correct!\n")
             score += 1
         else:
             print(f"Wrong! The correct answer was {q['answer']}.\n")
-    
+
     # Display the score when the user exits or finishes the quiz
     print(f"Your score: {score}/{len(quiz)}")
     print("Thanks for playing!")
