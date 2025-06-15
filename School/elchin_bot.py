@@ -25,9 +25,7 @@ async def fact(ctx):
         "Python released February 20, 1991",
         "There are over 700 programming languages",
         "The first computer bug was an actual moth found in a computer in 1947.",
-        "The first programming language was created in the 1800s by Ada Lovelace, making her the world’s first programmer.",
-
-
+        "The first programming language was created in the 1800s by Ada Lovelace, making her the world’s first programmer."
     ]
     my_fact = random.choice(facts)
     await ctx.send(my_fact)
