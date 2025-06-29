@@ -2,8 +2,7 @@ All of my python projects.
 
 To run the projects you need to have python installed on your system.
 
-On windows
-You need to visit https://www.python.org/downloads/windows/
+On Windows You need to visit: ```https://www.python.org/downloads/windows/```
 and download appropriate version for your system.
 
 On linux you can install python with you system's package manager.
