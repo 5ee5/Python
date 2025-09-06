@@ -48,7 +48,10 @@ async def fact(interaction: discord.Interaction):
 # ℹ️ /about command
 @bot.tree.command(name="about", description="Learn about Elchin Bot")
 async def about(interaction: discord.Interaction):
-    await interaction.response.send_message("I'm Elchin Bot created by E5 on 14.05.2025")
+	await interaction.response.defer()
+	app = await bot.application_info()
+	owner = app.owner
+	await interaction.followup.send(f"I'm Elchin Bot created by {owner.mention} on 14.05.2025")
 
 # 🔥 /roast command
 roasts = [
@@ -60,24 +63,10 @@ roasts = [
     "You're about as helpful as a traffic jam.",
     "You're the beta version of a broken app.",
     "You're like a fork in a soup restaurant.",
-    "You're like Bluetooth in a dead zone — all show, no go.",
-    "You're like a diet soda — tastes like disappointment.",
-    "You're like the last slice of bread — dry and unwanted.",
-    "You're like a user manual — nobody wants to read you.",
-    "You're like a song on loop — annoying after 30 seconds.",
-    "You're the reason people check if their mic is muted.",
-    "You're a walking Wi-Fi dead zone.",
-    "You're the kind of person who makes a mess in Minecraft creative mode.",
-    "You're like a fake progress bar — full of lies.",
     "You're like a broken keyboard — can’t type anything smart.",
     "You're the kind of person who brings a spoon to a knife fight.",
     "You're more extra than an unpaid intern.",
     "You're as relevant as MySpace.",
-    "You're like a missed call — no one wants to return it.",
-    "You're the person who says 'Let's circle back' in a text chat.",
-    "You're as welcome as a pop quiz on Friday.",
-    "You're like a rejected emoji — unnecessary and confusing.",
-    "You're like a bootleg action figure.",
     "You're a low-resolution version of a decent idea.",
     "You're like a banana in a toolbox — weird and unhelpful.",
     "You're like a tab with 47 open sites and no purpose.",
@@ -100,16 +89,6 @@ roasts = [
     "You're like a clickbait title — full of disappointment.",
     "You're the 'before' picture in a tech upgrade.",
     "You're a cold pizza that no one ordered.",
-    "You're like subtitles for a silent movie.",
-    "You're like a sneeze that never comes.",
-    "You're like a USB that never fits the first time.",
-    "You're a patch note full of nerfs.",
-    "You're like a group chat with 100 unread messages — overwhelming and unimportant.",
-    "You're the side quest no one wanted to complete.",
-    "You're the reason the tutorial was too long.",
-    "You're a CPU with 100% cringe usage.",
-    "You're the loading icon that never finishes.",
-    "You're like caps lock — accidentally on and annoying.",
 
 ]
 
