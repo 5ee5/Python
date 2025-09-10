@@ -10,6 +10,7 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 
 intents = discord.Intents.default()
 intents.message_content = True
+intents.members = True
 
 class ElchinBot(commands.Bot):
     def __init__(self):
@@ -25,6 +26,14 @@ bot = ElchinBot()
 async def on_ready():
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
     print("Good morning, in the morning!")
+
+# Welcoming
+@bot.event
+async def on_member_join(member: discord.Member):
+    channel = discord.utils.get(member.guild.text_channels, name="welcome")  # change to your channel
+    if channel:
+        await channel.send(f"Welcome to the server, {member.mention}! 🎉")
+
 
 # 🍪 /cookie command
 @bot.tree.command(name="cookie", description="Get a cookie!")
