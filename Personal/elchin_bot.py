@@ -10,7 +10,7 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 
 intents = discord.Intents.default()
 intents.message_content = True
-intents.members = True
+intents.members = True  # Required to detect member joins
 
 class ElchinBot(commands.Bot):
     def __init__(self):
@@ -27,13 +27,24 @@ async def on_ready():
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
     print("Good morning, in the morning!")
 
-# Welcoming
+# Welcoming + role assignment
 @bot.event
 async def on_member_join(member: discord.Member):
+    # Welcome message
     channel = discord.utils.get(member.guild.text_channels, name="welcome")  # change to your channel
     if channel:
         await channel.send(f"Welcome to the server, {member.mention}! 🎉")
-
+    
+    # Assign role
+    role = discord.utils.get(member.guild.roles, name="Member")  # change to your role name
+    if role:
+        try:
+            await member.add_roles(role)
+            print(f"Assigned role {role.name} to {member.name}")
+        except discord.Forbidden:
+            print(f"Cannot assign role {role.name} to {member.name} — check role hierarchy and permissions")
+        except Exception as e:
+            print(f"Error assigning role: {e}")
 
 # 🍪 /cookie command
 @bot.tree.command(name="cookie", description="Get a cookie!")
@@ -49,18 +60,18 @@ async def fact(interaction: discord.Interaction):
         "There are over 700 programming languages",
         "The first computer bug was an actual moth found in a computer in 1947.",
         "Ada Lovelace created the first programming language in the 1800s.",
-	"The Linux kernel has over 30 million lines of code.",
-	"Git, the version control system, was created by Linus Torvalds in 2005."
+        "The Linux kernel has over 30 million lines of code.",
+        "Git, the version control system, was created by Linus Torvalds in 2005."
     ]
     await interaction.response.send_message(random.choice(facts))
 
 # ℹ️ /about command
 @bot.tree.command(name="about", description="Learn about Elchin Bot")
 async def about(interaction: discord.Interaction):
-	await interaction.response.defer()
-	app = await bot.application_info()
-	owner = app.owner
-	await interaction.followup.send(f"I'm Elchin Bot created by {owner.mention} on 14.05.2025")
+    await interaction.response.defer()
+    app = await bot.application_info()
+    owner = app.owner
+    await interaction.followup.send(f"I'm Elchin Bot created by {owner.mention} on 14.05.2025")
 
 # 🔥 /roast command
 roasts = [
@@ -98,7 +109,6 @@ roasts = [
     "You're like a clickbait title — full of disappointment.",
     "You're the 'before' picture in a tech upgrade.",
     "You're a cold pizza that no one ordered.",
-
 ]
 
 @bot.tree.command(name="roast", description="Get a random roast")
@@ -107,3 +117,4 @@ async def roast(interaction: discord.Interaction):
     await interaction.response.send_message(roast_msg)
 
 bot.run(TOKEN)
+
