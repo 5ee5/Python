@@ -71,12 +71,13 @@ Respond strictly in valid JSON format:
 def main():
     jd_text = read_file("input_files/jd.txt")
 
-    os.makedirs("outputs", exist_ok=True)
-
-    for i in range(1, 3 + 1):
+    for i in range(1, 4):
         cv_path = f"input_files/cv{i}.txt"
-        json_path = f"output_files/cv{i}.json"
-        md_path = f"output_files/cv{i}_report.md"
+        cv_folder = f"output_files/CV{i}"
+        os.makedirs(cv_folder, exist_ok=True)
+
+        json_path = f"{cv_folder}/cv.json"
+        md_path = f"{cv_folder}/cv_report.md"
 
         print(f"\n🔍 Evaluating CV{i} ...")
         data = evaluate_cv(cv_path, jd_text)
