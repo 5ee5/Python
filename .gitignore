@@ -1,3 +1,5 @@
 .venv/
 School/25_26/.env
 School/25_26/log.json
+School/25_26/CV_evaluator/.env
+School/25_26/CV_evaluator/*_files
