@@ -3,7 +3,6 @@ import json
 from dotenv import load_dotenv
 import google.genai as genai
 
-# === Load API key from .env ===
 load_dotenv()
 API_KEY = os.getenv("GEMINI_API")
 if not API_KEY:
@@ -11,12 +10,10 @@ if not API_KEY:
 
 client = genai.Client(api_key=API_KEY)
 
-# === Read file contents ===
 def read_file(path):
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
-# === Convert JSON → Markdown ===
 def json_to_md(data, output_path):
     md = f"""# CV Evaluation Report
 
@@ -35,7 +32,6 @@ def json_to_md(data, output_path):
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(md)
 
-# === Evaluate one CV against the JD ===
 def evaluate_cv(cv_path, jd_text):
     cv_text = read_file(cv_path)
 
@@ -67,7 +63,6 @@ Respond strictly in valid JSON format:
     data = json.loads(text)
     return data
 
-# === Main function ===
 def main():
     jd_text = read_file("input_files/jd.txt")
 
