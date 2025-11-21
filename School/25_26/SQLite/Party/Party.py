@@ -4,7 +4,7 @@ while True:
     print("1. Add party")
     print("2. Add guest")
     print("exit/quit - Quit the App")
-    choice = input("Select action: ")
+    choice = input("Select action Nu2mber: ")
 
     if choice == "1":
         pass
